@@ -1,0 +1,35 @@
+.custom-modal .modal-header {
+    background-color: #f8f9fa;
+    border-bottom: none;
+    padding: 1rem 1.5rem;
+}
+
+.custom-modal .modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.custom-modal .modal-body {
+    padding: 2rem;
+}
+
+.custom-modal .country-details img {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.custom-modal .modal-footer {
+    background-color: #f8f9fa;
+    border-top: none;
+    padding: 1rem;
+}
+
+.custom-modal .btn-primary {
+    background: linear-gradient(45deg, #4a90e2, #007bff);
+    border: none;
+}
+
+.custom-modal .btn-secondary {
+    background-color: #6c757d;
+    border: none;
+}

@@ -1,0 +1,150 @@
+/* src/FacebookFeed.css */
+
+.facebook-feed-container {
+  width: 100%;
+  margin: 20px auto;
+  padding: 30px;
+  /* background: linear-gradient(145deg, #e0e7ff, #ffffff); */
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.feed-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 25px;
+  border-bottom: 1px solid #dfe3e6;
+}
+
+.page-profile-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+}
+
+.page-profile-img:hover {
+  transform: scale(1.15);
+}
+
+.page-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: #334e68;
+  flex-grow: 1;
+  text-align: left;
+  margin-left: 20px;
+}
+
+.follow-button {
+  background: linear-gradient(145deg, #4267B2, #3b5998);
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(66, 103, 178, 0.3);
+  transition: all 0.3s ease;
+}
+
+.follow-button:hover {
+  background: linear-gradient(145deg, #365899, #2d4373);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(66, 103, 178, 0.5);
+}
+
+.posts-marquee {
+  overflow: hidden;
+  margin-top: 25px;
+  padding: 20px 0;
+  border-radius: 10px;
+  background: #f0f4f8;
+  box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.posts-row {
+  display: flex;
+  gap: 15px;
+  animation: smoothScroll 45s linear infinite;
+}
+
+@keyframes smoothScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.post-card {
+  background: linear-gradient(135deg, #ffffff, #f7f9fc);
+  border-radius: 15px;
+  width: 300px;
+  min-width: 280px;
+  height: 350px;
+  margin: 0 15px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+.post-image {
+  width: 100%;
+  height: 60%;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.post-image:hover {
+  transform: scale(1.1);
+}
+
+.post-message {
+  font-size: 16px;
+  color: #555;
+  margin-top: 15px;
+  text-align: center;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.3s;
+}
+
+.post-card:hover .post-message {
+  color: #334e68;
+}
+
+.facebook-icon {
+  color: #4267B2;
+  font-size: 32px;
+  margin-top: 20px;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.facebook-icon:hover {
+  color: #2d4373;
+  transform: scale(1.2);
+}

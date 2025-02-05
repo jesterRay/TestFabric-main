@@ -1,0 +1,49 @@
+.auto-marquee-section {
+    padding: 40px 0;
+    background-color: #f8f8f8; /* Add background or use your desired styling */
+}
+
+.auto-marquee-container {
+    overflow-x: hidden;
+    white-space: nowrap;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auto-marquee-content {
+    display: flex;
+    gap: 20px;
+    min-width: max-content; /* Ensures the container is wide enough for scrolling */
+}
+
+/* Ensure ServicesOneCard fits inside the marquee smoothly */
+.auto-marquee-container .single-service-card {
+    flex: 0 0 auto; /* Prevent shrinking or growing */
+    min-width: 300px; /* Adjust card size */
+    max-width: 300px;
+}
+
+.auto-marquee-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Adjust the scrolling speed */
+.auto-marquee-container {
+    scroll-behavior: smooth;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .auto-marquee-container {
+        /* Adjust the speed or size of cards on smaller screens */
+    }
+
+    .auto-marquee-container .single-service-card {
+        min-width: 250px; /* Smaller card size on mobile */
+    }
+}

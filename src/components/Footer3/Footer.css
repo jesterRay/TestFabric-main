@@ -1,0 +1,52 @@
+.footer-widgets .social-media-links {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.footer-widgets .social-icon {
+    font-size: 35px;
+    color: black;
+    transition: color 0.3s;
+}
+
+.footer-widgets .social-icon:hover {
+    color: #4b59f7;
+}
+
+.footer-bottom .copyright-info a {
+    color: black;
+    margin-right: 15px;
+    font-size: smaller;
+}
+
+.footer-logos img {
+    width: 70px;
+    margin: 10px;
+    top: 30px;
+}
+
+.social-media-links-row {
+    display: flex;
+    gap: 15px; 
+    /* justify-content: start; */
+}
+
+.social-icons-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0f0f0f;
+    margin-top: 40px;
+}
+
+.social-icons-row svg {
+    font-size: 40px;
+    color: #fff;
+    
+    transition: color 0.3s ease;
+}
+
+.social-icons-row svg:hover {
+    color: #007bff;
+}

@@ -1,0 +1,262 @@
+.portfolio-section {
+  .swiper-container {
+    max-width: 100%;
+    height: 100%;
+  }
+  
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 5rem;
+    height: 4rem;
+    font-size: 2rem;
+    position: absolute;
+    left: auto;
+    top: 90%;
+    right: 180px;
+    background-repeat: no-repeat;
+    background-size: 30% auto;
+    background-position: center;
+
+    @media (max-width: 575px) {
+      width: 4rem;
+      height: 3rem;
+    }
+
+    @media (max-width: 400px) {
+      top: 97%;
+      margin-bottom: 2rem;
+    }
+  }
+
+  .swiper-button-next {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    right: 100px;
+    background-image: url("../../img/icon/right-arrow.png");
+    // background-color: #febc35;
+    background-color: #69C4E8;
+    color:#fff;
+
+    @media (max-width: 575px) {
+      right: 10px;
+    }
+  }
+
+  .swiper-button-prev {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-image: url("../../img/icon/left-arrow.png");
+    background-color: #69C4E8;
+    @media (max-width: 575px) {
+      right: 70px;
+    }
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    content: "";
+  }
+}
+
+.service-gallery {
+  .swiper-pagination {
+    top: 500px;
+  }
+
+  .swiper-pagination-bullet {
+    height: 12px;
+    width: 12px;
+    background-color: white !important;
+    opacity: 1;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #69C4E8 !important;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 2rem;
+    position: absolute;
+    top: 45%;
+    background-repeat: no-repeat;
+    background-size: 30% auto;
+    background-position: center;
+
+    &:hover {
+      background-color: $second-color;
+      transition: 0.3s;
+      -webkit-transition: 0.3s;
+      -moz-transition: 0.3s;
+      -ms-transition: 0.3s;
+      -o-transition: 0.3s;
+    }
+  }
+
+  .swiper-button-next {
+    right: 0px;
+    background-image: url("../../img/icon/right-arrow.png");
+    // background-color: #febc35;
+    background-color: #69C4E8;
+  }
+  .countries-model{
+    display: flex;
+  }
+
+  .swiper-button-prev {
+    left: 0px;
+    background-image: url("../../img/icon/left-arrow.png");
+    background-color: #69C4E8;
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    content: "";
+  }
+}
+
+// ACCORDION STYLING
+.accordion {
+  color: #777;
+  border: none;
+
+  &__item {
+    box-shadow: $box-shadow-2;
+    background-color: #fff;
+    margin-bottom: 2rem;
+    border: none;
+  }
+
+  &__button {
+    background-color: #fff;
+    display: block;
+    font-weight: 600;
+    line-height: 50px;
+    padding: 10px 28px;
+    position: relative;
+    color: #000;
+    font-size: 18px;
+    border: none;
+
+    &:hover {
+      background-color: white;
+      color: $theme-color;
+      transition: 0.3s;
+      -webkit-transition: 0.3s;
+      -moz-transition: 0.3s;
+      -ms-transition: 0.3s;
+      -o-transition: 0.3s;
+    }
+  }
+
+  &__button:before {
+    position: absolute;
+    top: 40%;
+    right: 20px;
+    color: $theme-color;
+  }
+
+  &__panel {
+    padding-left: 28px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+  }
+
+  // &__button[aria-expanded="true"]::before {
+  //     color: yellow;
+  // }
+}
+
+// MODAL VIDEO
+
+.modal-btn {
+  background-color: transparent;
+}
+
+.video-play-btn {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  background-color: $theme-color;
+  color: #fff;
+  border-radius: 50%;
+  line-height: 54px;
+
+  a {
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+.service-details-wrapper {
+  .accordion {
+    &__button {
+      background-color: #69C4E8;
+
+      &::before {
+        color: white;
+      }
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    &__item {
+      background-color: #69C4E8;
+      margin-bottom: 10px;
+    }
+  }
+}
+// FAQ 2
+.faq-2 {
+  .accordion__button {
+    color: #001248;
+    &:hover {
+      color: #69C4E8;
+    }
+  }
+}
+
+// PLAY BUTTON
+.video-fetaures-wrapper {
+  .video-play-btn {
+    background-color: transparent;
+    margin-top: -50px;
+    margin-left: -50px;
+  }
+}
+
+.brand-wrapper {
+  margin-top: -50px;
+  margin-bottom: 50px;
+}
+
+.team-section-2 {
+  .team-section {
+    padding: 0;
+  }
+}
+
+.video-featured-wrapper {
+  .video-wrapper .video-play-btn button {
+    -webkit-clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    border-radius: 0;
+    width: 120px;
+    height: 100px;
+    line-height: 100px;
+    background-color: #69C4E8;
+    color: #001659;
+  }
+
+  .video-wrapper .video-play-btn {
+    background-color: transparent;
+  }
+}
+
+

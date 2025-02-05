@@ -1,0 +1,43 @@
+/* CookiePolicy.css */
+
+.cookie-policy-container {
+    padding: 20px;               /* Padding inside the container */
+    line-height: 1.6;           /* Line height for readability */
+    background-color: #f9f9f9;  /* Light background for better readability */
+    border-radius: 8px;         /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin: 0 auto;             /* Center the container */
+    max-width: 100%;           /* Max width to limit container size */
+    text-align: center;         /* Center align text */
+  }
+  
+  h1 {
+    font-size: 2em;             /* Heading size */
+    margin-bottom: 20px;        /* Space below the heading */
+  }
+  
+  h2 {
+    font-size: 1.5em;           /* Subheading size */
+    margin-top: 20px;           /* Space above the subheading */
+  }
+  
+  p {
+    margin: 10px 0;             /* Space above and below paragraphs */
+    text-align: justify;        /* Justify text */
+  }
+  
+  ul {
+    margin: 10px 0;             /* Space above and below lists */
+    padding-left: 20px;         /* Indent list items */
+    text-align: left;           /* Align list items to the left */
+  }
+  
+  a {
+   /* Link color */
+    text-decoration: none;       /* Remove underline */
+  }
+  
+  a:hover {
+    text-decoration: underline;  /* Underline on hover */
+  }
+  
