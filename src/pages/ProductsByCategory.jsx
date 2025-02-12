@@ -42,7 +42,12 @@ function ProductsByCategory() {
             
             <PageBanner bannerBg={bannerBg} currentPage="Product Category" heading="Product Category" />
 
-            <Services1 heading1={"Categories"} heading2={"Our Categories"} heading3={"MASTER CATEGORIES"} apiName={"products_by_categories"} />
+            <Services1 
+                heading1={"Categories"} 
+                heading2={"Our Categories"} 
+                heading3={"MASTER CATEGORIES"} 
+                apiName={"products_by_categories"} 
+            />
             {/* <Process />
             <ProjectFilter2 /> */}
             <Footer3 />

@@ -1,37 +1,60 @@
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 export function useApi(baseUrl, params) {
-    const history = useHistory()
+    const history = useHistory();
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    useLayoutEffect(() => {
+    // Memoize params object using stable references
+    const memoizedParams = useMemo(() => params, [
+        ...Object.keys(params || {}),
+        ...Object.values(params || {})
+    ]);
+    
+    const isMounted = useRef(true);
+
+    useEffect(() => {
+        isMounted.current = true;
+        
+        if (!baseUrl) return;
+
+        const controller = new AbortController();
         setIsLoading(true);
 
-        // console.log('Calling API:', baseUrl, params);
         axios
-            .get(process.env.REACT_APP_API_URL + baseUrl, { params })
+            .get(`${process.env.REACT_APP_API_URL}${baseUrl}`, { 
+                params: memoizedParams,
+                signal: controller.signal 
+            })
             .then(response => {
-                setData(response?.data?.data);
-                setIsLoading(false);
-                // console.log('Calling Response Data:',baseUrl,"_____",response?.data?.data);
+                if (isMounted.current) {
+                    setData(response?.data?.data || null);
+                }
             })
             .catch(error => {
-                setError(error);
-                // console.log('Calling Response Error:',baseUrl,"_____", error);
-                setIsLoading(false);
-                // history.push('/')
-            });
-            return(()=>{
-                setData(null)
-                setError(null)
-                setIsLoading(false)
+                if (error.name === 'AbortError') return;
+                
+                if (isMounted.current) {
+                    setError(error);
+                    if (error.response?.status === 404) {
+                        history.push("/");
+                    }
+                }
             })
-    }, []);
+            .finally(() => {
+                if (isMounted.current) {
+                    setIsLoading(false);
+                }
+            });
+
+        return () => {
+            controller.abort();
+            isMounted.current = false;
+        };
+    }, [baseUrl, memoizedParams, history]);
 
     return { data, error, isLoading };
 }
-

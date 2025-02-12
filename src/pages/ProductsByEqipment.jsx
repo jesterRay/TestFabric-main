@@ -16,7 +16,12 @@ function ProductsByEqipment() {
         <>
             <Header3 />
             <PageBanner bannerBg={bannerBg} currentPage="Equipment Categories" heading="EQUIPMENT CATEGORIES" />
-            <Services1 heading1={"Equipment Categories"} heading2={"EQUIPMENT Categories"} heading3={"EQUIPMENT CATEGORIES"} apiName={"equipment_category"} />
+            <Services1 
+                heading1={"Equipment Categories"} 
+                heading2={"EQUIPMENT Categories"} 
+                heading3={"EQUIPMENT CATEGORIES"} 
+                apiName={"equipment_category"} 
+            />
             {/* <Process />
             <ProjectFilter2 /> */}
             {/* <Footer2 /> */}

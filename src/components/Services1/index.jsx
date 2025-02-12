@@ -10,29 +10,14 @@ import Bg1 from '../../assets/img/home1/eng.jpg';
 
 function Services1(props) {
     const { data, error, isLoading } = useApi(props?.apiName, {});
-    // useEffect(()=>{
-    //     axios.get(process.env.REACT_APP_API_URL+"products_by_categories")
-    //     .then(res=>setCategories(res?.data))
-    // },[])
-    // console.log("datatatata : ",data)
+
     function suCrypt(id) {
         return btoa(btoa(id));
     }
     return (
         <section className="services-wrapper services-1 section-bg ">
             <div className="container">
-                {/* <div className="row">
-                    <div className="col-12 col-lg-12">
-                        <div className="section-title text-center">
-                            <span>{props?.heading1}</span>
-                            <p>{props?.heading2}</p>
-                            <h1>{props?.heading3}</h1>
-                        </div>
-                    </div>
-                </div> */}
-                {/* <div className="row" style={{marginTop:"20px",width:"100%"}}>
-                    <img src={'https://smilesdahub.com/tf/apis/cat_images/banner_'+suCrypt(lastWord)+'.jpg'}  />
-                </div> */}
+                
                 <div className="row">
                     {data!=null?
                         data?.map((item,index) => (
@@ -42,8 +27,8 @@ function Services1(props) {
                             // bgImg={Bg1}
                             //  <img src={'https://smilesdahub.com/tf/apis/cat_images/banner_'+suCrypt(lastWord)+'.jpg'}  /> 
 
-                            alterImg={process.env.REACT_APP_IMAGE_URL +'cat_images/banner_'+suCrypt(item?.category__ID)+'.jpg'}
-                            bgImg={process.env.REACT_APP_IMAGE_URL +'cat_images/'+suCrypt(item?.category__ID)+'.jpg'}
+                            alterImg={process.env.REACT_APP_IMAGE_URL +'cat_images/'+suCrypt(item?.category__ID)+'.jpg'}
+                            bgImg={process.env.REACT_APP_IMAGE_URL +'cat_images/banner_'+suCrypt(item?.category__ID)+'.jpg'}
                             // defaultImg={process.env.REACT_APP_IMAGE_URL +'images/product_testfabrics.jpg'}
                             defaultImg={defaultImage}
                             icon={icon1}

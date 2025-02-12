@@ -3,7 +3,7 @@ import { BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./ProductSlider.css";
-
+import { concatUrlPath } from "../../helpers/concatUrlPath";
 const ProductSlider = () => {
   const [productData, setProductData] = useState([]);
 
@@ -13,6 +13,7 @@ const ProductSlider = () => {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}best_seller_products`);
         if (response.data.success && Array.isArray(response.data.data)) {
           setProductData(response.data.data.flat());
+          console.log(productData);
         }
       } catch (error) {
         console.error("Error fetching product data:", error);
@@ -21,11 +22,15 @@ const ProductSlider = () => {
     fetchProducts();
   }, []);
 
+
   return (
     <div className="product-slider-container">
       <div className="marquee-container">
         {[...productData, ...productData].map((product, index) => 
-            <div key={`${product.product__ID}-${index}`} className="product-card">
+            {
+              let url = concatUrlPath('product-details',product.product__Name,product.product__ID);
+              return (
+                <div key={`${product.product__ID}-${index}`} className="product-card">
               <div className="card-thumb">
                 <img
                   src={`https://testfabrics.com/product_images/${product.product_image}`}
@@ -35,11 +40,13 @@ const ProductSlider = () => {
               </div>
               <div className="content">
                 <h3>{product.product__Name || "Product Name"}</h3>
-                <Link  to={`/product-details/${product.product__ID}`} className="read-btn">
+                <Link  to={url} className="read-btn">
                   View Details <BsArrowRight />
                 </Link>
               </div>
             </div>
+              );
+            }
         )}
       </div>
     </div>

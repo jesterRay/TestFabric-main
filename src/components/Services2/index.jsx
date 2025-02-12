@@ -94,7 +94,7 @@ function Services2() {
                             thumbnail={data.product__ID}
                             defaultImg={process.env.REACT_APP_IMAGE_URL + 'images/product_testfabrics.jpg'}
                             icon={<FaDraftingCompass />}
-                            
+                            productName={data.product__Name}
                             heading={`${index + 1}. ${data.product__Name}`}  // Adding numbers here
                             text={data?.product__Description?.slice(0, 95)+"..."}
                             subheading={data?.product__Number}

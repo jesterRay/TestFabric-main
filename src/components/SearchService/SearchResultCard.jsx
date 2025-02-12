@@ -4,6 +4,7 @@ import { Link,useHistory } from "react-router-dom";
 import { UserContext } from '../../App';
 import axios from 'axios';
 import { concatUrlPath } from '../../helpers/concatUrlPath';
+import suCrypt from '../../helpers/suCrypt';
 
 
 function SearchResultCard({ productId,thumbnail, icon, heading, text,subheading, defaultImg,onHide,searchType }) {
@@ -19,14 +20,9 @@ function SearchResultCard({ productId,thumbnail, icon, heading, text,subheading,
             return "standards_images/"
         }
         else if(searchType===4){
-            return "subcat_images/"
+            return "cat_images/"
         }
     }
-
-    function suCrypt(id) {
-        return btoa(btoa(id.toString()));
-    }
-
 
     const imageUrl = process.env.REACT_APP_IMAGE_URL+getImgFolder()+suCrypt(thumbnail)+".jpg";
 

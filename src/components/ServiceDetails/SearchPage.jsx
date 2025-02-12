@@ -38,7 +38,7 @@ const SearchObj = {
 
 
 // function to call get the products from api
-async function searchFunction(type, value) {
+async function  searchFunction(type, value) {
     let data = {};
   
     try {

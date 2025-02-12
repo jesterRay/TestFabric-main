@@ -83,10 +83,15 @@ window.onload=function(){
                     <br />
                     <div>
                       <?php if (file_exists("../map_images/".suCrypt($rowUpdate['countries__ID']).".jpg")){?>
-                      <img  width="32" border="0" src="../map_images/<?=suCrypt($rowUpdate['countries__ID'])?>.jpg?time=<?=time();?>" id="showImage_image" alt="Image">
+                      <img 
+                        width="32" 
+                        border="0" 
+                        src="../map_images/<?=suCrypt($rowUpdate['countries__ID'])?>.jpg?time=<?=time();?>" 
+                        id="showImage_image" 
+                        alt="Image">
                       <?php }else{ ?>
                       <img width="32" border="1" src="images/trans.gif" id="showImage_image" alt="Image">
-                      <? }?>
+                      <?php }?>
                     </div>
                     <br />
                     <div style="padding-bottom:5px">* Upload Flag: </div>

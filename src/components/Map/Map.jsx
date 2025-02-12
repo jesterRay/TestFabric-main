@@ -29,6 +29,9 @@ const DealerMap = () => {
    error: locationError,
     isLoading: locationLoading,
   } = useApi("get_ip_details", {});
+  useEffect(()=>{
+    console.log('location is:',location2);
+  },[location2])
 
   const isActiveLink = (path) => location.pathname === path;
 
@@ -39,6 +42,7 @@ const DealerMap = () => {
         const response = await axios.get('https://testfabrics.com/apis/index.php/map_agents_list');
         if (response.data.success) {
           setAgents(response.data.data);
+          console.log("agent is: ",response.data.data);
         }
       } catch (error) {
         console.error('Error fetching agent data:', error);
@@ -76,9 +80,9 @@ const DealerMap = () => {
         twoFingerDrag={false}
         style={mapStyle}
       >
-        {agents.map((agent) => (
+        {agents.map((agent,index) => (
           <Marker
-            key={agent.agent__Email}
+            key={agent.agent__Email+index}
             anchor={[parseFloat(agent.agent__Latitude), parseFloat(agent.agent__Longitude)]}
             color="#E55D87" // Custom marker color
             onMouseOver={() => setHoveredAgent(agent)}
@@ -93,7 +97,7 @@ const DealerMap = () => {
               {/* Flag image with updated path */}
               <img
                 src={`https://testfabrics.com/apis/country_flags/${hoveredAgent.agent__Flag}`} // Use the full URL for flag images
-                alt={`${hoveredAgent.agent__Name} Flag`}
+                alt={`${hoveredAgent.agent__Name.slice(0,3)} Flag`}
                 style={flagStyle} // Flag styling
               />
               <h3 style={agentNameStyle}>{hoveredAgent.agent__Name}</h3>

@@ -4,8 +4,9 @@ import { Link,useHistory } from "react-router-dom";
 import { UserContext } from '../../App';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import { concatUrlPath } from '../../helpers/concatUrlPath';
 
-function SevicesTwoCard({ productId,thumbnail, icon, heading, text,subheading, defaultImg, }) {
+function SevicesTwoCard({ productId,thumbnail, icon, heading, text,subheading, defaultImg,productName }) {
     const defaultImage = process.env.REACT_APP_IMAGE_URL+"product_images/T0E9PQ==_a.jpg";
     // process.env.REACT_APP_API_URL+"product_images/T0E9PQ==_a.jpg"
     //  "T0E9PQ==_a";
@@ -32,7 +33,8 @@ function SevicesTwoCard({ productId,thumbnail, icon, heading, text,subheading, d
    function handleClick() {
     setValues((pre) => ({ ...pre, productId: productId }));
     const urlHeading = heading.replaceAll(" ", "-") + "-" + productId;
-    history.push(`/product-details/${productId}`); // Add productId as a query parameter
+    const url = concatUrlPath('product-details',productName,productId);
+    history.push(url); // Add productId as a query parameter
 }
 
     function onError(e){
