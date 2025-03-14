@@ -4,10 +4,9 @@ import { useHistory } from "react-router-dom";
 import { UserContext } from '../../App';
 import { concatUrlPath } from '../../helpers/concatUrlPath';
 
-function ServicesOneCard({ categoryId, bgImg, icon, heading, btnText, defaultImg }) {
+function ServicesOneCard({ categoryId, bgImg, icon, heading, btnText, defaultImg,index }) {
     const history = useHistory();
     const { setValues } = useContext(UserContext);
-    const [hasDefaultFailed, setHasDefaultFailed] = useState(false);
 
     function handleClick() {
         setValues((pre) => ({ ...pre, categoryId: categoryId }));
@@ -15,14 +14,6 @@ function ServicesOneCard({ categoryId, bgImg, icon, heading, btnText, defaultImg
         history.push(urlPath);
     }
 
-    function onError(e) {
-        if (!hasDefaultFailed && defaultImg && e.target.src !== defaultImg) {
-            setHasDefaultFailed(true);
-            e.target.src = defaultImg;
-        } else {
-            e.target.style.display = 'none';
-        }
-    }
 
     return (
         <div className="col-md-6 col-xl-3 col-12">
@@ -38,14 +29,13 @@ function ServicesOneCard({ categoryId, bgImg, icon, heading, btnText, defaultImg
                 >
                     <img 
                         style={{ height: "100%", width: "100%", objectFit: "cover" }} 
-                        src={bgImg} 
-                        onError={onError} 
+                        src={bgImg ? bgImg : defaultImg} 
                         alt={heading || "Service"} 
                     />
                 </div>
 
                 <div className="content" style={{ padding: "15px", borderRadius: "0 0 12px 12px" }}>
-                    <h3>{heading}</h3>
+                    <h3>{(index+1)+". \n"+(heading)?.slice(0,50)}</h3>
                     <a onClick={handleClick} className="read-btn">
                         {btnText} <BsArrowRight style={{ fontSize: '18px' }} />
                     </a>

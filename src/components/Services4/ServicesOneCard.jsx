@@ -2,21 +2,18 @@ import React, { useContext } from 'react';
 import { BsArrowRight } from 'react-icons/bs';
 import { useHistory } from "react-router-dom";
 import { UserContext } from '../../App';
+import { concatUrlPath } from '../../helpers/concatUrlPath';
 
-function ServicesOneCard({ sucategoryId, bgImg, icon, heading, btnText, defaultImg }) {
+function ServicesOneCard({ sucategoryId, bgImg, icon, heading, btnText, defaultImg,index }) {
     const history = useHistory();
     const { setValues } = useContext(UserContext);
 
     function handleClick() {
         setValues((pre) => ({ ...pre, sucategoryId: sucategoryId }));
-        const nameReplace = heading.replaceAll("/", "");
-        const urlHeading = nameReplace.replaceAll(" ", "-") + "-" + (sucategoryId);
-        history.push(`/product/${urlHeading}`);
+        const urlPath = concatUrlPath('product',heading,sucategoryId);
+        history.push(urlPath);
     }
 
-    function onError(e) {
-        e.target.src = defaultImg;
-    }
 
     return (
         <div className="col-md-6 col-xl-3 col-12">
@@ -29,12 +26,16 @@ function ServicesOneCard({ sucategoryId, bgImg, icon, heading, btnText, defaultI
                         overflow: "hidden",
                     }}
                 >
-                    <img style={{ height: "100%", width: "100%" }} src={bgImg} onError={onError} alt="Service Image" />
+                    <img 
+                        src={bgImg ? bgImg : defaultImg} 
+                        alt="Service Image" 
+                        style={{ height: "100%", width: "100%" }} 
+                    />
                 </div>
 
                 <div className="content" style={{ padding: "15px", borderRadius: "0 0 12px 12px" }}>
                     <h3>
-                        <a onClick={handleClick}>{heading}</a>
+                        <a onClick={handleClick}>{`${index+1}. ${heading}`}</a>
                     </h3>
                     <a onClick={handleClick} className="read-btn">
                         {btnText} <BsArrowRight />

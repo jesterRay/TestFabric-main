@@ -7,6 +7,7 @@ import Header3 from '../components/Header3';
 import Parser from 'html-react-parser';
 import Footer3 from '../components/Footer3';
 import axios from 'axios';
+import { Helmet } from 'react-helmet';
 
 function ProjectDetails() {
     let location = useLocation();
@@ -15,7 +16,11 @@ function ProjectDetails() {
     const [loading, setLoading] = useState(!location.state);
     const [error, setError] = useState(null);
 
+    console.log("data is: ",data);
+    console.log(serviceName);
+
     useEffect(() => {
+
         const fetchServiceList = async () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_API_URL}services_list`);
@@ -61,6 +66,8 @@ function ProjectDetails() {
         if (!location.state) {
             fetchServiceList();
         }
+
+      
     }, [location.state, serviceName]);
 
     // if (loading) return <div>Loading...</div>;
@@ -68,6 +75,9 @@ function ProjectDetails() {
 
     return (
         <>
+            <Helmet>
+                <title>{`Testfabrics.com: ${data?.heading?.slice(0,50) || "SERVICE"}`}</title>
+            </Helmet>
             <Header3 />
             <section className="page-banner-wrap-2">
                 <div className="container">
@@ -92,7 +102,11 @@ function ProjectDetails() {
                     </div>
                 </div>
             </section>
-            <PortfolioDetails pageData={data?.item} heading={data?.heading} category={data?.category} />
+            {
+                data && (
+                    <PortfolioDetails pageData={data?.item} heading={data?.heading} category={data?.category} />
+                )
+            }
             <Footer3 />
         </>
     );

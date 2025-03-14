@@ -4,6 +4,7 @@ import PageBanner from '../components/PageBanner';
 import Footer3 from '../components/Footer3';
 import BuyForm from '../components/ContactForm/BuyForm';
 import { useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const BuyForm1 = () => {
   const location = useLocation();
@@ -19,7 +20,9 @@ const BuyForm1 = () => {
         category={categoryName} 
         subcategory={subcategoryName} />
       <br /> */}
-
+      <Helmet>
+      <title>{`Testfabrics.com: ORDER BUY REQUEST FORM`}</title>
+      </Helmet>
       <BuyForm
         formTitle="Fields with (*) are required to be completed."
         // formHeading="Buy Now"

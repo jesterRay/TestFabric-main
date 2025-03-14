@@ -7,6 +7,7 @@ import Services1 from '../components/Services1';
 import Header3 from '../components/Header3';
 import Footer3 from '../components/Footer3';
 import Services11 from '../components/Services11';
+import { Helmet } from 'react-helmet';
 
 function ProductsByIntrestGroup() {
     useEffect(()=>{
@@ -14,6 +15,10 @@ function ProductsByIntrestGroup() {
     },[])
     return (
         <>
+            <Helmet>
+            <title>{`Testfabrics.com: ${"Interest Group Category".toUpperCase()}`}</title>
+
+            </Helmet>
             <Header3 />
             {/* <PageBanner bannerBg={bannerBg} currentPage="Categories" heading="MASTER CATEGORIES" /> */}
             {/* <section

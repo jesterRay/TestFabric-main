@@ -2,40 +2,36 @@ import React, { useContext, useState } from 'react';
 import { BsArrowRight } from 'react-icons/bs';
 import { useHistory } from "react-router-dom";
 import { UserContext } from '../../App';
+import { concatUrlPath } from '../../helpers/concatUrlPath';
 
 function ServicesOneCard({ index, categoryId, bgImg, icon, heading, btnText, defaultImg, alterImg }) {
     const history = useHistory();
     const { setValues } = useContext(UserContext);
-    const [imageToShow, setImageToShow] = useState(bgImg);
+    const [imageToShow, setImageToShow] = useState(
+        bgImg ? bgImg : alterImg ? alterImg : defaultImg
+    );
     const [attemptedImages, setAttemptedImages] = useState([]);
 
     function handleClick() {
         setValues((pre) => ({ ...pre, categoryId: categoryId }));
-        const urlHeading = heading.replaceAll(" ", "-").replaceAll("/", "") + "-" + (categoryId);
-        history.push(`/product-by-subcategory/${urlHeading}`);
+        const urlPath = concatUrlPath('product-by-subcategory',heading,categoryId);
+        history.push(urlPath);
     }
 
-    function onError(e) {
-        // Track the current failed image
-        const failedImage = e.target.src;
-        setAttemptedImages(prev => [...prev, failedImage]);
     
-        // Try images in order: bgImg → alterImg → defaultImg → hide element
-        if (alterImg && !attemptedImages.includes(alterImg)) {
-            setImageToShow(alterImg);
-        } else if (bgImg && !attemptedImages.includes(bgImg)) {
-            setImageToShow(bgImg);
-        } else if (defaultImg && !attemptedImages.includes(defaultImg)) {
-            setImageToShow(defaultImg);
-        } else {
-            e.target.style.display = 'none'; // Hide the image if all fail
-        }
-    }
     
 
     return (
         <div className="col-md-6 col-xl-3 col-12">
-            <div className="single-service-card" onClick={handleClick} style={{ cursor: "pointer", borderRadius: "12px", minHeight: "350px" }}>
+            <div 
+                className="single-service-card" 
+                onClick={handleClick} 
+                style={{ 
+                    cursor: "pointer", 
+                    borderRadius: "12px", 
+                    minHeight: "350px" 
+                }}
+            >
                 <div
                     className="card-thumb bg-cover"
                     style={{
@@ -48,7 +44,6 @@ function ServicesOneCard({ index, categoryId, bgImg, icon, heading, btnText, def
                     <img 
                         style={{ height: "100%", width: "100%", objectFit: "cover" }} 
                         src={imageToShow}
-                        onError={onError} 
                         alt={heading || "Service Image"} 
                         loading="lazy"
                     />

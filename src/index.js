@@ -5,7 +5,6 @@ import App from './App';
 import './index.scss';
 import reportWebVitals from './reportWebVitals';
 import 'react-toastify/dist/ReactToastify.css';
-
 ReactDOM.render(
     <React.StrictMode>
         <SimpleReactLightbox>

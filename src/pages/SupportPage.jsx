@@ -14,7 +14,7 @@ import msdss from '../assets/img/msdss.jpg'
 import tracks from '../assets/img/tracks.png'
 import downloads from '../assets/img/Downloads.png'
 import PageBanner from "../components/PageBanner";
-
+import { Helmet } from "react-helmet";
 
 // Define styles using Material-UI makeStyles
 const useStyles = makeStyles((theme) => ({
@@ -79,10 +79,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// Function to encrypt ID (optional utility)
-function suCrypt(id) {
-  return btoa(btoa(id));
-}
 
 function SupportPage() {
   const classes = useStyles();
@@ -92,6 +88,9 @@ function SupportPage() {
 
   return (
     <div>
+      <Helmet>
+        <title>{`Testfabrics.com: SUPPORT`}</title>
+      </Helmet>
       <Header3 />
       <PageBanner currentPage='Support options' heading='Support'/> 
       <div className={classes.supportPage}>
@@ -262,7 +261,7 @@ function SupportPage() {
             </Grid>
 
             <Grid item xs={12} sm={6} md={3}>
-                  <Link to="/CustomerComplaint" className={classes.link}>
+                  <Link to="/customer-feedback" className={classes.link}>
               <Card className={classes.card}>
                 <div className={classes.cardThumb}>
                   <img
@@ -274,13 +273,13 @@ function SupportPage() {
                 </div>
                 <CardContent className={classes.content}>
                   <Typography variant="h6" className={classes.cardTitle}>
-                  Customer Complaint
+                  Contact Us
                   </Typography>
                   <Typography variant="body2" className={classes.cardDescription}>
-                  Do your complaints here.
+                  Reach out to us here.
                   </Typography>
                     <Button variant="contained" fullWidth className={classes.button}>
-                    Compalint Here
+                    Contact Now
                     </Button>
                 </CardContent>
                 

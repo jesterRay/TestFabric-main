@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { GoogleReCaptcha, GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-function RequestForm4({ title, heading,url, input1="Product Lot Number:" }) {
+function  RequestForm4({ title, heading,url, input1="Product Lot Number:" }) {
     // STATES
     const [message, setMessage] = useState('');
     const history = useHistory()

@@ -16,13 +16,20 @@ import DealerMap from '../components/Map/Map';
 import ProductSlider from '../components/ProductSlider/ProductSlider';
 import FacebookFeed from './FacebookFeed';
 import InstagramFeed from './InstagramFeed';
-
+import { Helmet } from 'react-helmet';
 
 function NewLanding() {
 
+    const heading = "Testfabrics - Your Source for Quality Test Materials, Standard Fabrics, Soiled Fabrics and much more!";
+    const pagetitle = heading.length > 160 ? heading.slice(0,57) + '...' : heading;
     
     return (
         <>
+
+            <Helmet>
+                <title>{pagetitle}</title>
+
+            </Helmet>
             <Header3 />
             {/* <Hero1 /> */}
             <Promo />

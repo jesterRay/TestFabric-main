@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { UserContext } from '../../App';
 import { concatUrlPath } from '../../helpers/concatUrlPath';
 
-function ServicesOneCard({ sucategoryId, bgImg, icon, heading, btnText, subHeading, defaultImg }) {
+function ServicesOneCard({ sucategoryId, bgImg, icon, heading, btnText, subHeading, defaultImg,index }) {
     const history = useHistory();
     const { setValues } = useContext(UserContext);
 
@@ -15,19 +15,20 @@ function ServicesOneCard({ sucategoryId, bgImg, icon, heading, btnText, subHeadi
         history.push(urlPath);
     }
 
-    function onError(e) {
-        e.target.src = defaultImg;
-    }
+    
 
     return (
         <div className="col-md-6 col-xl-3 col-12">
             <div className="single-service-card" onClick={handleClick}>
                 <div className="card-thumb bg-cover">
-                    <img style={{ height: "100%", width: "100%", objectFit: "cover" }} src={bgImg} onError={onError} alt="Service" />
+                    <img 
+                        style={{ height: "100%", width: "100%", objectFit: "cover" }} 
+                        src={bgImg ? bgImg : defaultImg} 
+                        alt="Service" />
                 </div>
 
                 <div className="content">
-                    <h3>{heading}</h3>
+                    <h3>{`${index+1}. ${heading}`}</h3>
                     <h5>{subHeading}</h5>
                     <a onClick={handleClick} className="read-btn">
                         {btnText} <BsArrowRight style={{ fontSize: '18px' }} />

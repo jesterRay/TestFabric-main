@@ -9,10 +9,14 @@ import Header3 from '../components/Header3';
 import RequestForm4 from '../components/ContactForm/RequestForm4';
 import Footer3 from '../components/Footer3';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
+import { Helmet } from 'react-helmet';
 
 function RequestCertificte({bannerHeading,currentPage,formTitle,formHeading,url}) {
     return (
         <>
+            <Helmet>
+            <title>{`Testfabrics.com: ${currentPage.toUpperCase()}`}</title>
+            </Helmet>
             <Header3 />
             <PageBanner bannerBg={bannerBg} heading={""} currentPage={currentPage} />
             {/* <ContactUs /> */}

@@ -411,7 +411,7 @@ export default Topbar3;
 //                       <Link to="/heritage">Heritage</Link>
 //                     </li>
 //                     <li>
-//                       <Link to="/associate-and-patners">
+//                       <Link to="/associate-and-partners">
 //                         Associate & Partners
 //                       </Link>
 //                     </li>

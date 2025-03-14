@@ -10,10 +10,14 @@ import RequestForm from '../components/ContactForm/RequestForm';
 import RequestForm2 from '../components/ContactForm/RequestForm2';
 import SwatchForm from '../components/ContactForm/SwatchForm';
 import Footer3 from '../components/Footer3';
+import { Helmet } from 'react-helmet';
 
 function RequestSwetch({bannerHeading,currentPage,formTitle,formHeading}) {
     return (
         <>
+            <Helmet>
+                <title>{`Testfabrics.com: ${currentPage.slice(0,60).toUpperCase()}`}</title>
+            </Helmet>
             <Header3 />
             <PageBanner bannerBg={bannerBg} heading={''} currentPage={currentPage} />
             {/* <ContactUs /> */}

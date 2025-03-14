@@ -4,6 +4,7 @@ import Header3 from '../components/Header3';
 import PageBanner from '../components/PageBanner';
 import Footer3 from '../components/Footer3';
 import ContactPPt from '../components/RequestQoute';
+import { Helmet } from 'react-helmet';
 
 const RequestQuote = () => {
   const location = useLocation();
@@ -11,6 +12,9 @@ const RequestQuote = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>{`Testfabrics.com: REQUEST A QUOTE`}</title>
+      </Helmet>
       <Header3 />
       
      

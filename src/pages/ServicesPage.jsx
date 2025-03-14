@@ -22,6 +22,7 @@ import Footer3 from "../components/Footer3";
 import Header3 from "../components/Header3";
 import PageBanner from "../components/PageBanner";
 import { useApi } from "../middleware/middleware";
+import { Helmet } from "react-helmet";
 
 const useStyles = makeStyles((theme) => ({
     servicesPage: {
@@ -140,6 +141,9 @@ function ServicesPage() {
 
     return (
         <div>
+            <Helmet>
+                <title>{`Testfabrics.com: SERVICES`}</title>
+            </Helmet>
             <Header3 />
             <PageBanner  currentPage="Services" />
             <div className={classes.servicesPage}>

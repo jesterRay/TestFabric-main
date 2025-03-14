@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Header3 from '../components/Header3';
 import Footer3 from '../components/Footer3';
 import Map2 from '../components/Map2/Map2';
+import { Helmet } from 'react-helmet';
 
 function Location() {
     const { country } = useParams();
@@ -33,7 +34,10 @@ function Location() {
     }
 
     return (
-        <>
+        <>  
+            <Helmet>
+                <title>{`Testfabrics.com: ${("country "+country).toUpperCase() || "COUNTRY"}`}</title>
+            </Helmet>
             <Header3 />
             <div style={styles.container}>
                 <h1 style={styles.header}>{country}</h1>

@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { PostApi } from '../../middleware/postMiddleware';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-function OrderForm({ title, heading }) {
+function OrderForm({ title, heading, url }) {
     const history = useHistory();
     const [verified, setVerified] = useState(false);
 
@@ -61,7 +61,7 @@ function OrderForm({ title, heading }) {
             }))
         };
 
-        const res = await PostApi('testfabrics_fabrics_swatch_request', formData);
+        const res = await PostApi(url, formData);
         res ? toast.success('Response Sent Successfully') : toast.error('Please Fill all the required data');
         setTimeout(() => history.push('/'), 2500);
     };

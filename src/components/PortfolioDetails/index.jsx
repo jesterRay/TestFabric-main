@@ -23,9 +23,9 @@ function PortfolioDetails({ pageData, heading, category }) {
     const [src, setSrc] = useState("");
     const [htmlData, setHtmlData] = useState(pageData);
 
-
     const extractImageSrc = (htmlCode) => {
-        const regex = /src="([^"]+)"/g;
+
+        const regex = /src="([^"]+)"/g; //regex to extract the src from the image tag
         const match = regex.exec(htmlCode);
         if (match) {
             setSrc(process.env.REACT_APP_IMAGE_URL + match[1]);
@@ -35,9 +35,11 @@ function PortfolioDetails({ pageData, heading, category }) {
         // const pageDataHtml = htmlCode.replace(regex2, "$1");
         // setHtmlData(pageDataHtml)
     };
+
+
     useEffect(() => {
-        !pageData && history.push("/")
         extractImageSrc(pageData);
+        // console.log(pageData)
     }, [pageData])
     // console.log("pageData : "+pageData);
     return (
@@ -74,7 +76,7 @@ function PortfolioDetails({ pageData, heading, category }) {
                                 pageData&&
                                 Parser(pageData)
                             } */}
-                            {
+                            {/* {
                                 heading?.toLowerCase() == 'custom dyeing' ?
                                     <CustomDyeing /> :
                                     heading?.toLowerCase() == 'custom padding' ?
@@ -90,13 +92,15 @@ function PortfolioDetails({ pageData, heading, category }) {
                                                         heading?.toLowerCase() == 'paper backing' ?
                                                             <PaperBacking /> :
                                                             heading?.toLowerCase() == 'sewing' ?
-                                                                <Sewing /> :
-                                                                <>
-                                                                    {
-                                                                        pageData &&
-                                                                        Parser(pageData)
-                                                                    }</>
-                            }
+                                                                <Sewing /> : null
+                                                                
+                            } */}
+                            <div className='my-5'>
+                                {
+                                    pageData &&
+                                    Parser(pageData)
+                                }
+                            </div>
                             {/* <CustomPadding/> 
  */}
                             <div className="row py-2">

@@ -8,10 +8,14 @@ import Header3 from '../components/Header3';
 import RequestForm3 from '../components/ContactForm/RequestForm3';
 import CountrySection from '../components/ChooseRegion';
 import Footer3 from '../components/Footer3';
+import { Helmet } from 'react-helmet';
 
 function ChooseRegion({bannerHeading,currentPage}) {
     return (
         <>
+            <Helmet>
+                <title>{`Testfabrics.com: COUNTRY`}</title>
+            </Helmet>
             <Header3 />
             <PageBanner bannerBg={bannerBg} heading={bannerHeading} currentPage={currentPage} />
             <br/>

@@ -9,10 +9,14 @@ import Services7 from '../components/Services7';
 import Header3 from '../components/Header3';
 import Services9 from '../components/Services9';
 import Footer3 from '../components/Footer3';
+import { Helmet } from 'react-helmet';
 
 function NewsPage() {
     return (
         <>
+            <Helmet>
+                <title>{`Testfabrics.com: NEWS`}</title>
+            </Helmet>
             <Header3 />
             <PageBanner bannerBg={bannerBg} currentPage="News" heading="News" />
             <Services9 />

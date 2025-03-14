@@ -8,14 +8,21 @@ import { useApi } from '../middleware/middleware';
 import { useLocation,useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { extractIdFromUrlPath, concatUrlPath } from '../helpers/concatUrlPath';
+import { Helmet } from 'react-helmet';
 
 function ServicesDetails({match}) {
 
     const location = useLocation();
     const history = useHistory();
-
+    const [productId,setProductId] = useState(
+        extractIdFromUrlPath(location.pathname || '')
+    );
     // get product id from url
-    const productId = extractIdFromUrlPath(location.pathname || '');
+    useEffect(()=>{
+        setProductId(
+            extractIdFromUrlPath(location.pathname || '')
+        );
+    },[location.pathname]);
 
     const [testingStandards, setTestingStandards] = useState([]);
     const [testMethods, setTestMethods] = useState([]);
@@ -85,6 +92,7 @@ function ServicesDetails({match}) {
 
     return (
         <>
+
             <Header3 />
             <section
                 className="page-banner-wrap-2 bg-cover mb-2 mb-md-5"

@@ -88,7 +88,7 @@ function Footer3() {
                       );
                     })}
                     <li>
-                      <Link to={"/associate-and-patners"}>
+                      <Link to={"/associate-and-partners"}>
                         ASSOCIATION AND PARTNERS
                       </Link>
                     </li>

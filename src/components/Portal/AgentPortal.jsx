@@ -5,6 +5,7 @@ import Footer3 from "../Footer3"
 import bannerBg from "../../assets/img/page-banner.jpg"
 import "./Portal.css"
 import { useState } from "react"
+import { Helmet } from "react-helmet"
 
 
 
@@ -31,6 +32,9 @@ const AgentPortal = () => {
 
     return (
         <>
+            <Helmet>
+                <title>{`Testfabrics.com: ${"Agent Portal".slice(0,60).toUpperCase()}`}</title>
+            </Helmet>
             <Header3/>
             <PageBanner bannerBg={bannerBg} currentPage="Agent Portal"  />
             <section className="portal ">

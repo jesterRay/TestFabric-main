@@ -71,6 +71,11 @@
         padding: 2px 9px!important;
 
     }
+    .search-dropdown-value{
+      font-size: 12px;
+      min-width: 40px!important;
+
+    }
 }
 .search-result-dropdown{
   cursor: pointer;
@@ -95,8 +100,13 @@
   cursor: pointer;
   overflow: hidden;
   white-space: nowrap;
-  width: 60px;
+  /* width: 160px; */
+  min-width: 60px;
+  width: fit-content;
 }
+
+
+
 
 .search-dropdown-item-container{
   position: absolute;

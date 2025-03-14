@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SRLWrapper } from "simple-react-lightbox";
 import img1 from "../../assets/img/gallery/5.jpg";
 import img2 from "../../assets/img/gallery/6.jpg";
@@ -9,7 +9,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { extractIdFromUrlPath } from "../../helpers/concatUrlPath";
-
+import { Helmet } from "react-helmet";
 function DetailsContent() {
   // {data,min}
   const { values } = useContext(UserContext);
@@ -17,14 +17,23 @@ function DetailsContent() {
   const history = useHistory();
 
   // get product id from url
-  const productId = extractIdFromUrlPath(location.pathname || '');
-  // incase productId not found
-  if(!productId) history.goBack();
+  const [productId,setProductId] = useState(
+    extractIdFromUrlPath(location.pathname || '')
+  );
+  useEffect(()=>{
+    setProductId(
+      extractIdFromUrlPath(location.pathname || '')
+    );
+  },[location.pathname])
+
   
 
   const { data, error, isLoading } = useApi("testfabrics_product_detail", {
     Product_id: productId,
   });
+
+  console.log("data is:", data);
+
   const [quantityData, setQuantityData] = React.useState(null);
   const [availableData, setAvailableData] = React.useState([]);
 
@@ -65,9 +74,15 @@ function DetailsContent() {
         {line || "N/A"}
       </p>
     ));
+    const meta_description = data?.[0]?.product__Description.length > 160 ?
+                              data?.[0]?.product__Description.slice(0,157) + '...' : data?.[0]?.product__Description;
 
   return (
     <>
+      <Helmet>
+        <title>{`Testfabrics.com: ${data?.[0]?.product__Name ?? 'Product'}`}</title>
+        <meta name="description" content={meta_description} />
+      </Helmet>
       <h2>{data?.[0]?.product__Name}</h2>
       <hr />
 
@@ -94,6 +109,23 @@ function DetailsContent() {
           {quantityData?.data?.[0]?.Min__Name}
         </h6>
       )}
+
+      <div>
+            {/* Approximate Weight */}
+            {(data?.[0].product__Weight_gm_m2 !== 0 || data?.[0].product__Weight_Oz_yd2 !== 0) && (
+                <h6 style={{ fontWeight: "normal" }}>
+                    <b>Approx Weight:</b> {data?.[0].product__Weight_gm_m2} grams/meter<sup>2</sup> (
+                    {data?.[0].product__Weight_Oz_yd2} ounces/yard<sup>2</sup>)
+                </h6>
+            )}
+
+            {/* Approximate Width */}
+            {(data?.[0].product__Width_Inches !== 0 || data?.[0].product__Width_Cm !== 0) && (
+                <h6 style={{ fontWeight: "normal" }}>
+                    <b>Approx Width:</b> {data?.[0].product__Width_Inches} inches ({data?.[0].product__Width_Cm} cm)
+                </h6>
+            )}
+        </div>
 
       {/* 1 Piece <br></br>
             2. Crockmeter Machine Replacement Round Clip - 1 Piece <br></br>3. Crockmeter Machine Replacement Emery Paper - 4 Piece

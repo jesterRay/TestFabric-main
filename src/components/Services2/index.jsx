@@ -10,39 +10,47 @@ import { UserContext } from '../../App';
 import { useApi } from '../../middleware/middleware';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
-
+import suCrypt from '../../helpers/suCrypt';
+import { extractIdFromUrlPath } from '../../helpers/concatUrlPath';
+import { Helmet } from 'react-helmet';
 
 
 function Services2() {
     const {values} = useContext(UserContext)
-    const location= useLocation()
-    const pathData = location?.pathname;
-    function suCrypt(id) {
-        return btoa(btoa(id));
-    }
+    const location= useLocation();
+    const [productId,setProductId] = useState('');
+    const [title,setTitle] = useState("Product");
+    
 
-    const words = pathData?.split("-");
-    // Get the last word that starts with a hyphen
-    const lastHyphenatedWord = words?.reverse()?.find(word => word.startsWith("-"));
-    // If no word starting with hyphen is found, handle it gracefully
-    const lastWord = words[0];
 
-    // const { categoryId } = useParams();
-    // console.log("pathData---- :",lastWord);
+    // extract the name from the url
+    useEffect(() => {
 
-    const { data, error, isLoading } = useApi('testfabrics_products_by_subcategory', {catID:lastWord});
+        let path = location.pathname.split("/");
+        console.log(path) // Extract from hash
+        const productSlug = path[2]; 
+        
+        if (productSlug) {
+            // Remove last part (assumed to be an ID)
+            const productName = productSlug.split("-").slice(0, -1).join(" ");   
+            // Set document title
+            console.log(productName)
+            setTitle(productName.toUpperCase());
+        }
 
-    // const [produts,setProducts] = useState(null)
-    // useEffect(()=>{
-    //     axios.get(process.env.REACT_APP_API_URL+"testfabrics_products_by_subcategory",{params:{catID:"205"}})
-    //     .then(res=>{console.log(res);setProducts(res?.data)})
-    // },[])
+        setProductId(
+            extractIdFromUrlPath(location.pathname || '')
+        );
+    }, [location]);
+
+    const { data, error, isLoading } = useApi('testfabrics_products_by_subcategory', {catID: productId});
+
     return (
         <>
-            <section
-                className="page-banner-wrap-2 bg-cover" style={{background:"white"}}
-                // style={{ backgroundImage: `url(${bannerBg})` }}
-            >
+            <Helmet>
+                <title>{`Testfabrics.com: ${title}`}</title>
+            </Helmet>
+            <section className="page-banner-wrap-2 bg-cover" style={{background:"white"}}>
                 <div className="container">
                     <div className="row">
                         <div className="col-12 col-lg-12">
@@ -95,9 +103,10 @@ function Services2() {
                             defaultImg={process.env.REACT_APP_IMAGE_URL + 'images/product_testfabrics.jpg'}
                             icon={<FaDraftingCompass />}
                             productName={data.product__Name}
-                            heading={`${index + 1}. ${data.product__Name}`}  // Adding numbers here
+                            heading={data.product__Name}  // Adding numbers here
                             text={data?.product__Description?.slice(0, 95)+"..."}
                             subheading={data?.product__Number}
+                            index={index}
                         />
                     ))}
                 </div>

@@ -11,43 +11,45 @@ import { useApi } from '../../middleware/middleware';
 import { useLocation } from 'react-router-dom';
 import PageBanner from '../PageBanner';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import defaultImage from '../../assets/img/gallery/9.jpg'
+import defaultImage from '../../assets/img/gallery/9.jpg';
+import suCrypt from '../../helpers/suCrypt';
+import { extractIdFromUrlPath } from '../../helpers/concatUrlPath';
+import { Helmet } from 'react-helmet';
 
 function Services4() {
-    const {values} = useContext(UserContext)
-    const location= useLocation()
-    const pathData = location?.pathname;
+    const {values} = useContext(UserContext);
+    const location= useLocation();
 
-    function suCrypt(id) {
-        return btoa(btoa(id));
-    }
+    const [productId,setProductId] = useState(
+        extractIdFromUrlPath(location.pathname || '')
+    );
+    useEffect(()=>{
+        setProductId(
+            extractIdFromUrlPath(location.pathname || '')
+        )
+    },[location.pathname])
 
-    const words = pathData?.split("-");
-    // Get the last word that starts with a hyphen
-    const lastHyphenatedWord = words?.reverse()?.find(word => word.startsWith("-"));
-    // If no word starting with hyphen is found, handle it gracefully
-    const lastWord = words[0];
+    const [titleApi,setTitleApi] = useState('category_by_id');
+    useEffect(()=>{},[]);
+    
+    const { data, error, isLoading } = useApi('products_by_subcategory', {catID:productId});
+    console.log("data: ",data)
+    const { data:page_title  , error: title_error,isLoading: title_isLoading } = useApi(titleApi, {id:productId});
+    
+    useEffect(() => {
+        if (!page_title && titleApi === 'category_by_id') {
+            console.log("No data found, switching API...");
+            setTitleApi('category_by_id');  // Try alternative API
+        }
+    }, [page_title, titleApi]);
 
-    // const { categoryId } = useParams();
-    // console.log("pathData---- :",lastWord);
-   
-    const { data, error, isLoading } = useApi('products_by_subcategory', {catID:lastWord});
-    // const { data, error, isLoading } = useApi('products_by_subcategory', {catID:categoryId});
 
-    // function suCrypt(id) {
-    //     return btoa(btoa(id));
-    // }
-    // const [subCategories,setSubCategories] = useState(null)
-    // useEffect(()=>{
-    //     axios.get(process.env.REACT_APP_API_URL+"products_by_subcategory",{params:{catID:"44"}})
-    //     .then(res=>setSubCategories(res?.data))
-    // },[])
-    // const defaultImg =
-    // function onError(e){
-    //     e.target.src = process.env.REACT_APP_API_URL +'cat_images/banner_'+suCrypt(values?.categoryId)+'.jpg'
-    // }
+
     return (
         <>
+            <Helmet>
+                <title>{`Testfabrics.com: ${(page_title?.[0]?.name)?.slice(0, 40) ?? 'PRODUCT BY SUBCATEGORY'}`}</title>
+            </Helmet>
             <section
                 className="page-banner-wrap-2 bg-cover"
                 // style={{ backgroundImage: `url(${bannerBg})` }}
@@ -102,12 +104,13 @@ function Services4() {
                             <ServicesOneCard
                                 key={item.subcategory__ID}
                                 sucategoryId={item.subcategory__ID}
-                                bgImg={process.env.REACT_APP_IMAGE_URL +'cat_images/'+suCrypt(item?.subcategory__ID)+'.jpg'}
+                                bgImg={item.img}
                                 // defaultImg={process.env.REACT_APP_IMAGE_URL + 'images/producfabrics.jpgt_test'}
                                 defaultImg={defaultImage}
                                 icon={Icon1}
-                                heading={`${index+ 1}.${item.subcategory__Name}`}
+                                heading={item.subcategory__Name}
                                 btnText={"See Products"}
+                                index={index}
                             />
                         ))
                         :<></>

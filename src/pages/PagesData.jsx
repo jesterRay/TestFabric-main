@@ -8,10 +8,14 @@ import AssociateCard from '../components/Card';
 import CarrerCard from '../components/Card/CarrerCard';
 import Footer3 from '../components/Footer3';
 import PagesDataDb from '../components/PagesDataDb';
+import { Helmet } from 'react-helmet';
 
 function PagesData({bannerHeading,currentPage,pageId}) {
     return (
         <>
+            <Helmet>
+                <title>{`Testfabrics.com: ${currentPage.slice(0,60).toUpperCase()}`}</title>
+            </Helmet>
             <Header3 />
             <PageBanner bannerBg={bannerBg} heading={bannerHeading} currentPage={currentPage}  />
             {/* <ContactUs /> */}

@@ -7,7 +7,7 @@ function TeamMembers() {
         <section className="team-section section-padding">
             <div className="container">
                 <div className="row mtm-30">
-                    <h3>
+                    <h3 className='mt-4'>
                         Our Incredible Team is Our Core
                     </h3>
                     <p>
@@ -24,6 +24,7 @@ function TeamMembers() {
                             twitterLink={data.twitterLink}
                             behanceLink={data.behanceLink}
                             youtubeLink={data.youtubeLink}
+                            bio={data.bio}
                         />
                     ))}
                 </div>

@@ -9,28 +9,39 @@ const FacebookFeed = () => {
   // const pageId = '401722289700437'; // Your Page ID
   // const accessToken = 'EAASCj3LGvCQBO0K9Nb2o5fnNYQBLWNZCHhkqdiVIPlCJBKSCwtMlUrS6ZCoHJSjZBkQFWUqYHNuSEMpJBzZAdwunccFLevTu9FY5lYgZAxYZAnTp8LzKOa2bpJmZCzBgL9DWbd2kl3RtnAYiSqPSXTjaoQIZBlBI51b2Ml3RvyMAJWZCDrXUcqZAGNJ0mZBJn9RxZA5LZANxtUzUX'; // Your Access Token
 
-  const pageId = '125484653983679'; // Your Page ID
-  const accessToken = "EAAIl1CMU7lkBO5SELkiMY1a0r7PUUMML9qzV2lcOYEPuzo8ZCj6mBDWWSianLUmQT93ZCdHg9yN0rlwL6k33LwEEBeVgVO1XuZBgQo8zlh8F45BDG4VPl5tgSMITzW1juxzwpzaU4RtB8zYUgE1PENZCgAOigNymZBi1kMnZCQaOKsqMuogKFqY0u4Y0L5UpsZBTZAX4VKoxddZAvrRW8nAucJ0kZD"
+  const pageId = '17841457642551464'; // Your Page ID
+  const accessToken = "EAAIl1CMU7lkBOZBHEmMG2suEPZAZBPVAVzab4h14mXZBtPZAooljQW0AbeMMxi4L5S6Io9q2bFt1cNqd4QGgaS0dqO5X2GW6MhjL9OaeRCsO9DCIGlnQn5rGE3t0Rt6ORG7zgjwCjOI9wZBeWuWy11OiUtinOohWKkVu4NaVZBErwEEEm6RyXIEfwwd00g8eDJed5c4TiVCmMGTctZCtxvmGykQOitkZD"
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          `https://graph.facebook.com/v12.0/${pageId}/posts`,
+          `https://graph.facebook.com/v12.0/${pageId}/media`,
           {
             params: {
               access_token: accessToken,
-              fields: 'id,message,full_picture', // Fetch message and full picture
+              fields: 'id,caption,media_url,permalink,timestamp,media_type', // Instagram fields
             }
           }
         );
-        console.log("response data",response.data)
-        setPosts(response.data.data || []);
-
+        console.log("response data", response.data);
+        
+        // Map Instagram fields to match your existing Facebook structure
+        const mappedPosts = response.data.data.map(post => ({
+          id: post.id,
+          message: post.caption || '', // 'caption' in Instagram is equivalent to 'message' in Facebook
+          full_picture: post.media_url || '', // 'media_url' in Instagram is equivalent to 'full_picture' in Facebook
+          permalink: post.permalink, // Additional useful field
+          timestamp: post.timestamp,
+          media_type: post.media_type
+        }));
+        
+        setPosts(mappedPosts || []);
+  
       } catch (error) {
-        console.error('Error fetching Facebook posts:', error);
+        console.error('Error fetching Instagram posts:', error);
       }
     };
-
+  
     fetchPosts();
   }, [pageId, accessToken]);
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import bannerBg from '../assets/img/page-banner.jpg';
 import PageBanner from '../components/PageBanner';
 import AssociatedTestMethodCard from '../components/AssociatedTestMethodCard/AssociatedTestMethodCard';
@@ -11,17 +11,30 @@ import { useParams } from 'react-router-dom';
 import { useApi } from '../middleware/middleware';
 import { extractIdFromUrlPath } from '../helpers/concatUrlPath';
 import { useLocation } from 'react-router-dom';
+import suCrypt from '../helpers/suCrypt';
+import { Helmet } from 'react-helmet';
 function ProductsByStandardMethods() {
     const location = useLocation();
-    const categoryId = extractIdFromUrlPath(location.pathname || '');
-    const { data, error, isLoading } = useApi('products_by_standard_method', { catID: categoryId });
+    const [categoryId,setCategoryId] = useState(
+        extractIdFromUrlPath(location.pathname || '')
+    );
 
-    function suCrypt(id) {
-        return btoa(btoa(id));
-    }
+    useEffect(()=>{
+        setCategoryId(
+            extractIdFromUrlPath(location.pathname || '')
+        );
+    },[location.pathname]);
+
+    const { data, error, isLoading } = useApi('products_by_standard_method', { catID: categoryId });
+    const { data: title, error: title_error, isLoading: title_isLoading } = useApi('method_by_id', { id: categoryId });
+
+    
 
     return (
         <>
+            <Helmet>
+                <title>{`Testfabrics.com: ${title?.[0]?.name?.slice(0,50) || "PRODUCT BY STANDARDS METHOD"}`}</title>
+            </Helmet>
             <Header3 />
             <PageBanner bannerBg={bannerBg} currentPage="Standard Methods" heading="Standard Methods"  />
             <section className="services-wrapper services-1 section-bg section-padding">
@@ -36,9 +49,10 @@ function ProductsByStandardMethods() {
                                         bgImg={process.env.REACT_APP_IMAGE_URL + 'product_images/' + suCrypt(item.product__ID) + '.jpg'}
                                         defaultImg={defaultImage}
                                         icon={Icon1}
-                                        heading={`${index + 1}.${item.product__Name}`}
+                                        heading={item.product__Name}
                                         subHeading={item?.product__Description.slice(0,60)+"..."}
                                         btnText={"See Products"}
+                                        index={index}
                                     />
                                 ))
                             ) : <h3>No result Found</h3>

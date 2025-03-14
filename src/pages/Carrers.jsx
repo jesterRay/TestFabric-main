@@ -7,10 +7,15 @@ import InviteFriendForm from '../components/ContactForm/InviteFriendForm';
 import AssociateCard from '../components/Card';
 import CarrerCard from '../components/Card/CarrerCard';
 import Footer3 from '../components/Footer3';
+import { Helmet } from 'react-helmet';
 
 function Carrers({bannerHeading,currentPage}) {
     return (
         <>
+            <Helmet>
+            <title>{`Testfabrics.com: ${currentPage.slice(0,60).toUpperCase()}`}</title>
+
+            </Helmet>
             <Header3 />
             <PageBanner bannerBg={bannerBg} heading={bannerHeading} currentPage={currentPage} />
             {/* <ContactUs /> */}

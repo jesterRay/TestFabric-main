@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { BsArrowRight } from 'react-icons/bs';
 import { useHistory } from "react-router-dom";
 import { UserContext } from '../../App';
+import { concatUrlPath } from '../../helpers/concatUrlPath';
 
 function ServicesOneCard({ index, categoryId, bgImg, icon, heading, btnText, defaultImg, alterImg }) {
     const history = useHistory();
@@ -9,8 +10,8 @@ function ServicesOneCard({ index, categoryId, bgImg, icon, heading, btnText, def
 
     function handleClick() {
         setValues((pre) => ({ ...pre, categoryId: categoryId }));
-        const urlHeading = heading.replaceAll(" ", "-").replaceAll("/", "") + "-" + (categoryId);
-        history.push(`/product-by-subcategory/${urlHeading}`);
+        const url = concatUrlPath('product-by-subcategory',heading,categoryId);
+        history.push(`${url}`);
     }
 
     function onError(e) {

@@ -6,6 +6,7 @@ import ServicesOneCard from './ServicesOneCard';
 import { useApi } from '../../middleware/middleware';
 import icon1 from "../../assets/img/icon/s1.png"
 import Bg1 from '../../assets/img/home1/eng.jpg';
+import suCrypt from '../../helpers/suCrypt';
 
 function Services11(props) {
     const { data, error, isLoading } = useApi(props?.apiName, {});
@@ -14,9 +15,7 @@ function Services11(props) {
     //     .then(res=>setCategories(res?.data))
     // },[])
     // console.log("datatatata : ",data)
-    function suCrypt(id) {
-        return btoa(btoa(id));
-    }
+ 
     return (
         <section className="services-wrapper services-1 section-bg ">
             <div className="container">

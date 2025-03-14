@@ -1,17 +1,35 @@
-import React,{useContext} from 'react';
+import React,{useContext, useEffect, useState} from 'react';
 import { BsArrowRight } from 'react-icons/bs';
 import { Link,useHistory } from "react-router-dom";
 import { UserContext } from '../../App';
 import axios from 'axios';
 import { concatUrlPath } from '../../helpers/concatUrlPath';
 import suCrypt from '../../helpers/suCrypt';
-
+import fetchMainImageForProduct from '../../helpers/fetch_image';
 
 function SearchResultCard({ productId,thumbnail, icon, heading, text,subheading, defaultImg,onHide,searchType }) {
 
     const defaultImage = process.env.REACT_APP_IMAGE_URL+"product_images/T0E9PQ==_a.jpg";
     // process.env.REACT_APP_API_URL+"product_images/T0E9PQ==_a.jpg"
     //  "T0E9PQ==_a";
+
+    const [mainImage, setMainImage] = useState(null);
+    useEffect(() => {
+        if(searchType === 2){
+            const getMainImage = async () => {
+                if (!productId) return; // Prevent running for undefined productId
+                
+                const image = await fetchMainImageForProduct(productId);
+                if(image) setMainImage(image);
+                else setMainImage(defaultImage);
+            };
+    
+            getMainImage();
+        }
+    }, [searchType,productId]); // Runs when productId changes
+
+
+
     function getImgFolder(){
         if(searchType===2){
             return "product_images/"
@@ -31,15 +49,16 @@ function SearchResultCard({ productId,thumbnail, icon, heading, text,subheading,
 
     function handleClick(){
         setValues((pre)=>({...pre,productId:productId}))
+        let urlPath = null;
         if(searchType===3){
-            history.push(`/product-by-standards-subcategory/${productId}`)
-            return;
+            urlPath = concatUrlPath('product-by-standards-subcategory',heading,productId);
         }
         else if(searchType===5){
-            history.push(`/products-by-standard-methods/${productId}`)
-            return;
+            urlPath = concatUrlPath('products-by-standard-methods',heading,productId);
         }
-        const urlPath = concatUrlPath('product-details',heading,productId) 
+        else{
+            urlPath = concatUrlPath('product-details',heading,productId);            
+        }
         history.push(urlPath);
     }
 
@@ -54,7 +73,7 @@ function SearchResultCard({ productId,thumbnail, icon, heading, text,subheading,
                     <img
                         data-value = {imageUrl}
                         // data-id = {testData}
-                        src={imageUrl} 
+                        src={searchType === 2 ? mainImage : imageUrl} 
                         onError={(e) => onError(e)}
                         alt={heading}
                     />

@@ -18,7 +18,7 @@ function SearchWidget(props) {
 
     const [toggleDropdown, setToggleDropdown] = useState(false);
 
-    const searchOptions = ['All','Product','Test Standard',"Category","Method"];
+    const searchOptions = ['All','Products','Standards',"Categories","Methods"];
     const history = useHistory();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -52,7 +52,7 @@ function SearchWidget(props) {
             </div> */}
             <div className="search_widget">
                 <form onSubmit={submitHandler} style={{display:"flex"}}>
-                    <div className='search-dropdown' onChange={searchHandler} onClick={() => setToggleDropdown(prev => !prev)} name='type' value={search.type}>
+                    <div className='search-dropdown' onChange={searchHandler} onClick={() => setToggleDropdown(prev => !prev)} name='type' value={search.type} style={{ minWidth: 'fit-content' }}>
                         <div className='search-dropdown-value' 
                             >
                                 {
@@ -65,9 +65,9 @@ function SearchWidget(props) {
                                     onClick={() => handleSearchOption(1)} 
                                 >All</li>
                                 {/* <option value={2}>category</option> */}
-                                <li className='search-dropdown-item' onClick={() => handleSearchOption(2)}>Product</li>
-                                <li className='search-dropdown-item' onClick={() => handleSearchOption(3)}>Test Standard</li>
-                                <li className='search-dropdown-item' onClick={() => handleSearchOption(4)}>Category</li>
+                                <li className='search-dropdown-item' onClick={() => handleSearchOption(2)}>Products</li>
+                                <li className='search-dropdown-item' onClick={() => handleSearchOption(3)}>Standards</li>
+                                <li className='search-dropdown-item' onClick={() => handleSearchOption(4)}>Categories</li>
                                 <li className='search-dropdown-item' onClick={() => handleSearchOption(5)}>Methods</li>
                             {/* <option value={4}>Interest Group</option> */}
                             </ul>

@@ -5,6 +5,7 @@ import Header3 from '../Header3';
 import Footer3 from '../Footer3';
 import PageBanner from '../PageBanner';
 import bannerBg from '../../assets/img/page-banner.jpg';
+import { Helmet } from 'react-helmet';
 
 
 const CareerDetail = () => {
@@ -25,6 +26,10 @@ const CareerDetail = () => {
 
     return(
         <>
+            <Helmet>
+                <title>{`Testfabrics.com: ${career?.career__Name?.slice(0,60).toUpperCase()}`}</title>
+
+            </Helmet>
             <Header3 />
             <PageBanner bannerBg={bannerBg} heading={'Career Details'} currentPage={'Career Details'} />
             {/* <ContactUs /> */}

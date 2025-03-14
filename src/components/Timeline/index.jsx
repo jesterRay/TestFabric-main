@@ -14,7 +14,7 @@ export default function App() {
     useEffect(() => {
         const fetchHeritageData = async () => {
             try {
-                const response = await fetch("https://testfabrics.com/apis/index.php/heritage_page_data");
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/heritage_page_data`);
                 const result = await response.json();
 
                 if (result.success) {

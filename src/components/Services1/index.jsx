@@ -7,41 +7,46 @@ import { useApi } from '../../middleware/middleware';
 import icon1 from "../../assets/img/icon/s1.png"
 import defaultImage from "../../assets/img/gallery/9.jpg"
 import Bg1 from '../../assets/img/home1/eng.jpg';
+import suCrypt from '../../helpers/suCrypt';
+import { Helmet } from 'react-helmet';
 
 function Services1(props) {
     const { data, error, isLoading } = useApi(props?.apiName, {});
 
-    function suCrypt(id) {
-        return btoa(btoa(id));
-    }
+    console.log(data);
     return (
-        <section className="services-wrapper services-1 section-bg ">
-            <div className="container">
-                
-                <div className="row">
-                    {data!=null?
-                        data?.map((item,index) => (
-                        <ServicesOneCard
-                            key={item.category__ID}
-                            categoryId={item.category__ID}
-                            // bgImg={Bg1}
-                            //  <img src={'https://smilesdahub.com/tf/apis/cat_images/banner_'+suCrypt(lastWord)+'.jpg'}  /> 
+        <>
+            <Helmet>
+                <title>{`Testfabrics.com: PRODUCT BY CATEGORY`}</title>
+            </Helmet>
+            <section className="services-wrapper services-1 section-bg ">
+                <div className="container">
+                    
+                    <div className="row">
+                        {data!=null?
+                            data?.map((item,index) => (
+                            <ServicesOneCard
+                                key={item.category__ID}
+                                categoryId={item.category__ID}
+                                // bgImg={Bg1}
+                                //  <img src={'https://smilesdahub.com/tf/apis/cat_images/banner_'+suCrypt(lastWord)+'.jpg'}  /> 
 
-                            alterImg={process.env.REACT_APP_IMAGE_URL +'cat_images/'+suCrypt(item?.category__ID)+'.jpg'}
-                            bgImg={process.env.REACT_APP_IMAGE_URL +'cat_images/banner_'+suCrypt(item?.category__ID)+'.jpg'}
-                            // defaultImg={process.env.REACT_APP_IMAGE_URL +'images/product_testfabrics.jpg'}
-                            defaultImg={defaultImage}
-                            icon={icon1}
-                            index={index+1}
-                            heading={item.category__Name}
-                            btnText="View Subcategories"
-                        />
-                        
-                    ))
-                    :<></>}
+                                alterImg={item.img}
+                                bgImg={item.banner_img}
+                                // defaultImg={process.env.REACT_APP_IMAGE_URL +'images/product_testfabrics.jpg'}
+                                defaultImg={defaultImage}
+                                icon={icon1}
+                                index={index+1}
+                                heading={item.category__Name}
+                                btnText="View Subcategories"
+                            />
+                            
+                        ))
+                        :<></>}
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 }
 

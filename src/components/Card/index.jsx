@@ -13,7 +13,7 @@ function AssociateCard() {
                     <div className="col-12 col-lg-12">
                         <div className="section-title text-center">
                             {/* <span style={{color:"lightgray"}}>News</span> */}
-                            {/* <p>News Feed</p> */}
+                            {/* <p>News Feed</p> */} 
                             <h1>Associate & Partners</h1>
                         </div>
                     </div>
@@ -24,9 +24,10 @@ function AssociateCard() {
                         <BlogOneItem
                             key={data?.associations_and_partners__ID}
                             thumb={data?.associations_and_partners__ID}
-
+                            url={data?.associations_and_partners__Url}
                             title={data?.associations_and_partners__Name}
                             description={data?.associations_and_partners__Description}
+                            img_url={data?.img}
                         />
                     ))}
                 </div>

@@ -101,9 +101,9 @@ function App() {
                             <ServicesPage />
                         </Route>
 
-                        <Route exact path = "/services/:id">
+                        {/* <Route exact path = "/services/:id">
                             <ServiceCardDetails />
-                        </Route>
+                        </Route> */}
 
                         <Route exact path='/support'>
 
@@ -123,7 +123,7 @@ function App() {
                         <CategoriesCards/>
                </Route>
 
-                <Route exact path='/customerComplaint'>
+                <Route exact path='/customer-feedback'>
                     <CustomerForm1 />
                 </Route>
                    
@@ -136,9 +136,9 @@ function App() {
                     <Route exact path="/heritage">
                         <About />
                     </Route>
-                    <Route exact path="/team">
+                    {/* <Route exact path="/team">
                         <Team />
-                    </Route>
+                    </Route> */}
                     <Route exact path="/faq">
                         <Faq />
                     </Route>
@@ -224,14 +224,14 @@ function App() {
                         <RequestSwetch bannerHeading="Fabric Swatch Request" currentPage="Fabric Swatch Request" formTitle="Fields with (*) are required to be completed." formHeading="Fabric Swatch Request" />
                     </Route>
                     <Route exact path="/order-request">
-                        <RequestOrder bannerHeading="Order Request" currentPage="Order Request" formTitle="Fields with (*) are required to be completed." formHeading="Order Request" />
+                        <RequestOrder bannerHeading="Order Request" currentPage="Order Request" formTitle="Fields with (*) are required to be completed." formHeading="Order Request" url={'testfabrics_fabrics_order_request'}/>
                     </Route>
                     <Route exact path='/buy-form'>
                         <BuyForm bannerHeading='Buy' />
                     </Route>
 
                     <Route exact path="/quote-request">
-                        <RequestOrder bannerHeading="Quote Request" currentPage="Quote Request" formTitle="Fields with (*) are required to be completed." formHeading="Quote Request" />
+                        <RequestOrder bannerHeading="Quote Request" currentPage="Quote Request" formTitle="Fields with (*) are required to be completed." formHeading="Quote Request" url={'testfabrics_fabrics_qoute_request'}/>
                     </Route>
                     <Route exact path="/catalog-request">
                         <RequestCatalog bannerHeading="Catalog Request" currentPage="Catalog Request" formTitle="Only available for US & Canada for anywhere else contact nearest one of the International Agents Fields with (*) are required to be completed." formHeading="Catalog Request" />
@@ -258,8 +258,8 @@ function App() {
                     <Route exact path="/tell-a-friend">
                         <TellAFriend bannerHeading="Invite a Friend" currentPage="Invite a Friend" formTitle="Fields with (*) are required to be completed." formHeading="Invite your Friend" url="tell_a_friend" />
                     </Route>
-                    <Route exact path="/associate-and-patners">
-                        <Associates  currentPage="Associate and Patners" bannerHeading=""  />
+                    <Route exact path="/associate-and-partners">
+                        <Associates  currentPage="Associate and Partners" bannerHeading=""  />
                     </Route>
                     <Route exact path="/carrers">
                         <Carrers currentPage="career" bannerHeading=""  />

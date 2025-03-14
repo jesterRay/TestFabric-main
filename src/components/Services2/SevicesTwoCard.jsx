@@ -5,37 +5,35 @@ import { UserContext } from '../../App';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { concatUrlPath } from '../../helpers/concatUrlPath';
-
-function SevicesTwoCard({ productId,thumbnail, icon, heading, text,subheading, defaultImg,productName }) {
+import suCrypt from '../../helpers/suCrypt';
+import fetchMainImageForProduct from '../../helpers/fetch_image';
+import { useState, useEffect } from 'react';
+function SevicesTwoCard({ productId,thumbnail, icon, heading, text,subheading, defaultImg,productName,index }) {
     const defaultImage = process.env.REACT_APP_IMAGE_URL+"product_images/T0E9PQ==_a.jpg";
     // process.env.REACT_APP_API_URL+"product_images/T0E9PQ==_a.jpg"
     //  "T0E9PQ==_a";
-    const imageUrl = process.env.REACT_APP_IMAGE_URL+"product_images/"+suCrypt()+".jpg";
+    // const imageUrl = process.env.REACT_APP_IMAGE_URL+"product_images/"+suCrypt()+".jpg";
+    const [mainImage, setMainImage] = useState(null);
+    useEffect(() => {
+        const getMainImage = async () => {
+            if (!productId) return; // Prevent running for undefined productId
+            
+            const image = await fetchMainImageForProduct(productId);
+            if(image) setMainImage(image);
+            else setMainImage(defaultImage);
+        };
 
-    const location= useLocation()
-    const pathData = location?.pathname;
-
-    function suCrypt() {
-        return btoa(btoa(thumbnail));
-    }
-    // console.log("imageeeeee : ",suCrypt(thumbnail))
-
-    
-    const words = pathData?.split("-");
-    // Get the last word that starts with a hyphen
-    const lastHyphenatedWord = words?.reverse()?.find(word => word.startsWith("-"));
-    // If no word starting with hyphen is found, handle it gracefully
-    const lastWord = words[0];
+        getMainImage();
+    }, [productId]); // Runs when productId changes
 
     const history = useHistory();
     const {setValues} = useContext(UserContext)
 
    function handleClick() {
-    setValues((pre) => ({ ...pre, productId: productId }));
-    const urlHeading = heading.replaceAll(" ", "-") + "-" + productId;
-    const url = concatUrlPath('product-details',productName,productId);
-    history.push(url); // Add productId as a query parameter
-}
+        setValues((pre) => ({ ...pre, productId: productId }));
+        const url = concatUrlPath('product-details',productName,productId);
+        history.push(url); // Add productId as a query parameter
+    }
 
     function onError(e){
         e.target.src = defaultImg
@@ -51,7 +49,7 @@ function SevicesTwoCard({ productId,thumbnail, icon, heading, text,subheading, d
 
                     // }}
                 >
-                    <img style={{height:"100%",width:"100%", borderRadius:" 12px 12px 0 0"}} src={imageUrl} onError={(e) => onError(e)}  />
+                    <img style={{height:"100%",width:"100%", borderRadius:" 12px 12px 0 0"}} src={mainImage} onError={(e) => onError(e)}  />
                 </div>
                   
                 <div className="content" style={{borderRadius:"0 0 12px 12px"}}>
@@ -59,7 +57,7 @@ function SevicesTwoCard({ productId,thumbnail, icon, heading, text,subheading, d
                         <a  onClick={handleClick}>{icon}</a>
                     </div> */}
                     <h3>
-                        <a  onClick={handleClick}>{heading}</a>
+                        <a  onClick={handleClick}>{`${index+1}. ${heading}`}</a>
                     </h3>
                     <h6>
                         <a  onClick={handleClick}>Item Number: {subheading}</a>

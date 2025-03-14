@@ -11,6 +11,7 @@ import { FaDraftingCompass } from 'react-icons/fa';
 import SearchResultCard from '../SearchService/SearchResultCard';
 import AllSearchResult from '../SearchService/AllSearchResult';
 import "../SearchService/SearchService.css";
+import { Helmet } from 'react-helmet';
 
 
 const SearchObj = {
@@ -35,7 +36,6 @@ const SearchObj = {
         url: 'search_test_methods',
     },
 }
-
 
 // function to call get the products from api
 async function  searchFunction(type, value) {
@@ -74,7 +74,7 @@ async function  searchFunction(type, value) {
     }
   
     return data;
-  }
+}
   
 // show the search result when user search for any product
 const SearchPage = () => {
@@ -98,13 +98,13 @@ const SearchPage = () => {
         }
     }, [search.type, search.value]);
 
-    useEffect(()=>{
-        console.log(results);
-    },[results])
 
 
     return(
         <>
+            <Helmet>
+                <title>{`Testfabrics.com: ${"search products, standards and methods".slice(0,60).toUpperCase()}`}</title>
+            </Helmet>
             <Header3/>
             <PageBanner bannerBg={bannerBg} currentPage="Search" heading="Testfabric Search" />
 

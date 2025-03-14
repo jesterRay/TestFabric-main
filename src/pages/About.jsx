@@ -10,10 +10,14 @@ import Sponsors from '../components/Sponsors';
 import Timeline from '../components/Timeline';
 import Header3 from '../components/Header3';
 import Footer3 from '../components/Footer3';
+import { Helmet } from 'react-helmet';
 
 function About() {
     return (
         <>
+            <Helmet>
+                <title>{`Testfabrics.com: HERITAGE`}</title>
+            </Helmet>
             <Header3 />
             {/* <PageBanner  /> */}
             {/* <AboutFeatured /> */}

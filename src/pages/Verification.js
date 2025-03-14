@@ -5,6 +5,7 @@ import { FaCheckCircle, FaTimesCircle, FaCircle } from 'react-icons/fa'; // Icon
 import image from '../assets/img/image.jpg';
 import Header3 from '../components/Header3';
 import Footer3 from '../components/Footer3';
+import { Helmet } from 'react-helmet';
 
 function Verification() {
     const [serialNumber, setSerialNumber] = useState('');
@@ -164,6 +165,9 @@ function Verification() {
 
     return (
         <>
+            <Helmet>
+                <title>{`Testfabrics.com: PRODUCT VERIFICATION`}</title>
+            </Helmet>
             <Header3 />
             <div style={containerStyle}>
                 <h2>Welcome to Testfabrics Product Verification System</h2> {/* Updated message */}

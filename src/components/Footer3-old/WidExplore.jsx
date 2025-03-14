@@ -10,7 +10,7 @@ function WidExplore() {
             <div className="splite-menu d-flex justify-content-between">
                 <ul>
                     <li>
-                        <Link to={'/associate-and-patners'}>ASSOCIATION AND PARTNERS</Link>
+                        <Link to={'/associate-and-partners'}>ASSOCIATION AND PARTNERS</Link>
                     </li>
                     <li>
                         <Link to={'/carrers'}>CAREERS</Link>

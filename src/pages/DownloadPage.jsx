@@ -11,10 +11,15 @@ import Timeline from '../components/Timeline';
 import Header3 from '../components/Header3';
 import Downloads from '../components/Downloads/Downloads';
 import Footer3 from '../components/Footer3';
+import { Helmet } from 'react-helmet';
 
 function DownloadPage() {
     return (
         <>
+            <Helmet>
+                <title>{`Testfabrics.com: ${"download".toUpperCase()}`}</title>
+
+            </Helmet>
             <Header3 />
             <PageBanner bannerBg={bannerBg} currentPage="Downloads" heading="" />
             <Downloads/>
